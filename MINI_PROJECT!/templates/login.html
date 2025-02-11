@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Buss Pass System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Welcome to Virtual Buss Pass Generator</h1>
+    <div class="cont">
+        <label for="username"><h4>Register Number</h4></label>
+        <input type="text">
+        <br>
+        <label for="password"><h4>Password</h4></label>
+        <input type="password">
+        <br>
+        <button type="submit" class="btn-login"><h4>Login</h4></button>
+        <br>
+        <a href="{{ url_for('newuser') }}"><h5>New user? Register here.</h5></a>
+    </div>
+</body>
+</html>
