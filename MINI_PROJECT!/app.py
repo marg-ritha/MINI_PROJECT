@@ -114,7 +114,7 @@ def login():
             session["user"] = register_number
             if table=='students':
                 student_type,status=extra_field,result[2]
-                if status.lower() != "enabled":  # ✅ Check if student is enabled
+                if status.lower() != "enabled":  
                     return render_template("login.html", error="Access Denied! Contact Admins.", role=role)
                 if student_type == "Day Scholar":
                     return redirect(url_for("dayscholar"))
