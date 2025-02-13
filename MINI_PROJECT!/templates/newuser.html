@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New User Registration</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <h1>New User Registration</h1>
@@ -20,7 +20,12 @@
         <label for="email"><h4>E-mail</h4></label>
         <input type="email" name="email" required>
         <br>
-        
+        <label for="type"><h4>Student Type</h4></label>
+        <select id="sttype" name="sttype" required>
+            <option value="Day Scholar">Day Scholar</option>
+            <option value="Hosteller">Hosteller</option>
+        </select>
+        <br>
         <label for="password"><h4>Password</h4></label>
         <input type="password" name="password" required>
         <br>
@@ -40,3 +45,4 @@
     </div>
 </body>
 </html>
+
