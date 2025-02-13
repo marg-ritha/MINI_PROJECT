@@ -9,14 +9,17 @@
     </div>
     <h1>SSET VIRTUAL BUS PASS</h1>
 
-    <div class="button-container">  <button id="adminButton">ADMIN</button>
+    <div class="button-container">  
+        <button id="adminButton">ADMIN</button>
         <a href="{{ url_for('login') }}">
             <button>STUDENT</button>
         </a>
         <button id="securityButton">SECURITY</button>
     </div>
-
     <script>
+        document.getElementById("adminButton").addEventListener("click", function() {
+        window.location.href = "{{ url_for('login') }}?role=admin";
+    });
     </script>
 </body>
-</html> 
+</html>
