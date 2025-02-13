@@ -32,16 +32,16 @@ h1 {
     display:flex;
     flex-direction: column;
     align-items: center;
-    max-height: 400px;
-    max-width: 400px;
+    max-height: 500px;
+    max-width: 500px;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 8px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
 }
 .container{
-    width: 100%;
-    height:80%;
+    width: auto;
+    height:auto;
 }
 .cont{
     width: 100%;
@@ -50,4 +50,66 @@ h1 {
 .contain{
     width:auto;
     height:auto;
+}
+
+table {
+    width: 100%; /* Make table take full width */
+    border-collapse: collapse; /* Remove double borders */
+    margin-top: 20px;
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th {
+    background-color: #3e54e0; /* Blue header */
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+
+td {
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+}
+
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+
+th, td {
+    border: 1px solid #ccc;
+}
+.flash-messages {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.flash-message {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.flash-message.success {
+    background-color: #28a745;
+    color: white;
+}
+
+.flash-message.error {
+    background-color: #dc3545;
+    color: white;
 }
