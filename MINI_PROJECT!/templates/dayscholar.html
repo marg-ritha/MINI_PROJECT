@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Advance Payment</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script>
+        async function fetchBusData() {
+            try {
+                const response = await fetch('/get_bus_info');
+                const busData = await response.json();
+                populateDestinationOptions(busData);
+                window.globalBusData = busData;
+            } catch (error) {
+                console.error('Failed to fetch bus data:', error);
+            }
+        }
+
+        function populateDestinationOptions(busData) {
+            const destinationSelect = document.getElementById("destinationSelect");
+            destinationSelect.innerHTML = "<option value=''>-- Select Destination --</option>";
+            Object.keys(busData).forEach(destination => {
+                const option = document.createElement("option");
+                option.value = destination;
+                option.textContent = destination;
+                destinationSelect.appendChild(option);
+            });
+
+            destinationSelect.addEventListener("change", () => populateDropOffs(busData));
+        }
+
+        function populateDropOffs(busData) {
+            const destination = document.getElementById("destinationSelect").value;
+            const dropOffSelect = document.getElementById("dropOffSelect");
+            dropOffSelect.innerHTML = "<option value=''>-- Select Drop-Off Location --</option>";
+
+            if (destination && busData[destination]) {
+                busData[destination].locations.forEach((loc, index) => {
+                    const option = document.createElement("option");
+                    option.value = index;
+                    option.textContent = loc;
+                    dropOffSelect.appendChild(option);
+                });
+            }
+            calculateFare();
+        }
+
+        function calculateFare() {
+            const busData = window.globalBusData;
+            const destination = document.getElementById("destinationSelect").value;
+            const dropOffIndex = document.getElementById("dropOffSelect").value;
+            const duration = document.getElementById("durationSelect").value;
+            const fareDisplay = document.getElementById("fareDisplay");
+
+            if (busData && destination && busData[destination] && dropOffIndex !== "" && duration) {
+                const farePerDay = busData[destination].fares[dropOffIndex];
+                const days = duration === "3" ? 90 : 180;
+                const totalFare = farePerDay * days;
+                fareDisplay.textContent = `Total Fare: ₹${totalFare}`;
+            } else {
+                fareDisplay.textContent = "Total Fare: ₹0";
+            }
+        }
+
+        window.onload = fetchBusData;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Bus Advance Payment</h1>
+
+        <label for="destinationSelect">Select Destination:</label>
+        <select id="destinationSelect" name="destination" required>
+            <option value="">-- Select Destination --</option>
+        </select>
+        <br>
+        <br>
+        <label for="dropOffSelect">Select Drop-Off Location:</label>
+        <select id="dropOffSelect" name="drop_off_location" onchange="calculateFare()" required>
+            <option value="">-- Select Drop-Off Location --</option>
+        </select>
+        <br>
+        <br>
+        <label for="durationSelect">Select Duration:</label>
+        <select id="durationSelect" name="duration" onchange="calculateFare()" required>
+            <option value="">-- Select Duration --</option>
+            <option value="3">3 Months</option>
+            <option value="6">6 Months</option>
+        </select>
+        <br>
+        <br>
+        <p id="fareDisplay">Total Fare: ₹0</p>
+
+        <form action="/proceed_to_payment_dayscholar" method="post">
+            <input type="hidden" id="selectedBus" name="selectedBus">
+            <button type="submit" onclick="setBusData()">Proceed to Payment</button>
+        </form>
+
+        <script>
+            function setBusData() {
+                const destination = document.getElementById("destinationSelect").value;
+                document.getElementById("selectedBus").value = destination;
+            }
+        </script>
+    </div>
+</body>
+</html>
