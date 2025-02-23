@@ -7,8 +7,8 @@ app.secret_key = os.urandom(24)
 db = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="mysql@Marg27",
-    database="virtual_bus_pass_system"
+    password="database_password",
+    database="name_of_database"
 )
 cursor = db.cursor()
 admin_id = "ADM/3030/22"
