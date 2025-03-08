@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Ticket</title>
+    <link rel="stylesheet" href="/static/tickets.css">
+</head>
+<body>
+    <div class="ticket-container">
+        <h2>Bus Ticket Confirmation</h2>
+        <p><strong>Payment ID:</strong> {{ session.payment_id }}</p>
+        <p><strong>Register Number:</strong> {{ student.register_number }}</p>
+        <p><strong>Name:</strong> {{ student.full_name }}</p>
+        <p><strong>Email:</strong> {{ student.email }}</p>
+        <p><strong>Amount Paid:</strong> ₹{{ student.paid_amount }}</p>
+        <p><strong>Status:</strong> Confirmed ✅</p>
+        <button onclick="window.print()">Print Ticket</button>
+    </div>
+</body>
+</html>
